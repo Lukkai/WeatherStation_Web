@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication4.Data;
 using WebApplication4.Models;
 
-namespace WebApplication4.Pages.Weather
+namespace WebApplication4.Pages.NewWeather
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace WebApplication4.Pages.Weather
         }
 
         [BindProperty]
-        public CityWeather CityWeather { get; set; }
+        public NewCityWeather NewCityWeather { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,9 +30,9 @@ namespace WebApplication4.Pages.Weather
                 return NotFound();
             }
 
-            CityWeather = await _context.CityWeather.FirstOrDefaultAsync(m => m.ID == id);
+            NewCityWeather = await _context.NewCityWeather.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (CityWeather == null)
+            if (NewCityWeather == null)
             {
                 return NotFound();
             }
@@ -48,7 +48,7 @@ namespace WebApplication4.Pages.Weather
                 return Page();
             }
 
-            _context.Attach(CityWeather).State = EntityState.Modified;
+            _context.Attach(NewCityWeather).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +56,7 @@ namespace WebApplication4.Pages.Weather
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CityWeatherExists(CityWeather.ID))
+                if (!NewCityWeatherExists(NewCityWeather.ID))
                 {
                     return NotFound();
                 }
@@ -69,9 +69,9 @@ namespace WebApplication4.Pages.Weather
             return RedirectToPage("./Index");
         }
 
-        private bool CityWeatherExists(int id)
+        private bool NewCityWeatherExists(int id)
         {
-            return _context.CityWeather.Any(e => e.ID == id);
+            return _context.NewCityWeather.Any(e => e.ID == id);
         }
     }
 }

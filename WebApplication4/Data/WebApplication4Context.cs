@@ -15,15 +15,17 @@ namespace WebApplication4.Data
         {
         }
 
-        public DbSet<WebApplication4.Models.CityWeather> CityWeather { get; set; }
 
-        public CityWeather AddDataToBase(string cityName)
-        {
-            var cityWeather = new CityWeather();
-            cityWeather.Name = cityName;
-            cityWeather = JsonConvert.DeserializeObject<CityWeather>(cityWeather.GetWeather());
-            return cityWeather;
-        }
+
+        public DbSet<WebApplication4.Models.NewCityWeather> NewCityWeather { get; set; }
+
+        //public NewCityWeather AddDataToBase(string cityName)
+        //{
+        //    var newCityWeather = new NewCityWeather();
+        //    newCityWeather.Name = cityName;
+        //    newCityWeather = JsonConvert.DeserializeObject<NewCityWeather>(newCityWeather.GetWeather());
+        //    return newCityWeather;
+        //}
 
     }
 }

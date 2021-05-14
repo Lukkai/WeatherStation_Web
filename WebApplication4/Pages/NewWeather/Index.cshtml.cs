@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication4.Data;
 using WebApplication4.Models;
 
-namespace WebApplication4.Pages.Weather
+namespace WebApplication4.Pages.NewWeather
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +19,11 @@ namespace WebApplication4.Pages.Weather
             _context = context;
         }
 
-        public IList<CityWeather> CityWeather { get;set; }
+        public IList<NewCityWeather> NewCityWeather { get;set; }
 
         public async Task OnGetAsync()
         {
-            CityWeather = await _context.CityWeather.ToListAsync();
+            NewCityWeather = await _context.NewCityWeather.ToListAsync();
         }
     }
 }

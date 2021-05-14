@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApplication4.Data;
 using WebApplication4.Models;
+using Newtonsoft.Json;
 
-namespace WebApplication4.Pages.Weather
+namespace WebApplication4.Pages.NewWeather
 {
     public class CreateModel : PageModel
     {
@@ -35,7 +36,15 @@ namespace WebApplication4.Pages.Weather
                 return Page();
             }
 
-            _context.CityWeather.Add(_context.AddDataToBase(Name));
+            NewCityWeather newWeather = new NewCityWeather();
+            CityWeather weather = new CityWeather();
+            CityWeather deserializedProduct = JsonConvert.DeserializeObject<CityWeather>(weather.GetWeather(Name));
+            
+            newWeather.Name = deserializedProduct.Name;
+            newWeather.temp = (deserializedProduct.Main.temp - 273.15f).ToString("0.00") + " *C";
+            newWeather.speed = (deserializedProduct.Wind.speed).ToString("0.00") + " mps";
+            
+            _context.NewCityWeather.Add(newWeather);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

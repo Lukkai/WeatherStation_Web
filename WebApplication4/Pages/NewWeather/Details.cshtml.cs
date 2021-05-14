@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication4.Data;
 using WebApplication4.Models;
 
-namespace WebApplication4.Pages.Weather
+namespace WebApplication4.Pages.NewWeather
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace WebApplication4.Pages.Weather
             _context = context;
         }
 
-        public CityWeather CityWeather { get; set; }
+        public NewCityWeather NewCityWeather { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +28,9 @@ namespace WebApplication4.Pages.Weather
                 return NotFound();
             }
 
-            CityWeather = await _context.CityWeather.FirstOrDefaultAsync(m => m.ID == id);
+            NewCityWeather = await _context.NewCityWeather.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (CityWeather == null)
+            if (NewCityWeather == null)
             {
                 return NotFound();
             }

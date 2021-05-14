@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication4.Data;
 using WebApplication4.Models;
 
-namespace WebApplication4.Pages.Weather
+namespace WebApplication4.Pages.NewWeather
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace WebApplication4.Pages.Weather
         }
 
         [BindProperty]
-        public CityWeather CityWeather { get; set; }
+        public NewCityWeather NewCityWeather { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,9 +29,9 @@ namespace WebApplication4.Pages.Weather
                 return NotFound();
             }
 
-            CityWeather = await _context.CityWeather.FirstOrDefaultAsync(m => m.ID == id);
+            NewCityWeather = await _context.NewCityWeather.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (CityWeather == null)
+            if (NewCityWeather == null)
             {
                 return NotFound();
             }
@@ -45,11 +45,11 @@ namespace WebApplication4.Pages.Weather
                 return NotFound();
             }
 
-            CityWeather = await _context.CityWeather.FindAsync(id);
+            NewCityWeather = await _context.NewCityWeather.FindAsync(id);
 
-            if (CityWeather != null)
+            if (NewCityWeather != null)
             {
-                _context.CityWeather.Remove(CityWeather);
+                _context.NewCityWeather.Remove(NewCityWeather);
                 await _context.SaveChangesAsync();
             }
 

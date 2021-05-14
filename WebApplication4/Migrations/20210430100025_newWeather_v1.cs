@@ -2,22 +2,52 @@
 
 namespace WebApplication4.Migrations
 {
-    public partial class weather : Migration
+    public partial class newWeather_v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CityWeather");
+
+            migrationBuilder.DropTable(
+                name: "MainWeather");
+
+            migrationBuilder.DropTable(
+                name: "Wind");
+
+            migrationBuilder.CreateTable(
+                name: "NewCityWeather",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    temp = table.Column<float>(type: "real", nullable: false),
+                    speed = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewCityWeather", x => x.ID);
+                });
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "NewCityWeather");
+
             migrationBuilder.CreateTable(
                 name: "MainWeather",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    temp = table.Column<float>(type: "real", nullable: false),
                     feels_like = table.Column<float>(type: "real", nullable: false),
-                    temp_min = table.Column<float>(type: "real", nullable: false),
-                    temp_max = table.Column<float>(type: "real", nullable: false),
+                    humidity = table.Column<int>(type: "int", nullable: false),
                     pressure = table.Column<int>(type: "int", nullable: false),
-                    humidity = table.Column<int>(type: "int", nullable: false)
+                    temp = table.Column<float>(type: "real", nullable: false),
+                    temp_max = table.Column<float>(type: "real", nullable: false),
+                    temp_min = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,8 +60,8 @@ namespace WebApplication4.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    speed = table.Column<float>(type: "real", nullable: false),
-                    deg = table.Column<float>(type: "real", nullable: false)
+                    deg = table.Column<float>(type: "real", nullable: false),
+                    speed = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,8 +74,8 @@ namespace WebApplication4.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MainID = table.Column<int>(type: "int", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WindID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -74,18 +104,6 @@ namespace WebApplication4.Migrations
                 name: "IX_CityWeather_WindID",
                 table: "CityWeather",
                 column: "WindID");
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "CityWeather");
-
-            migrationBuilder.DropTable(
-                name: "MainWeather");
-
-            migrationBuilder.DropTable(
-                name: "Wind");
         }
     }
 }

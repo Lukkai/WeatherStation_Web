@@ -40,7 +40,7 @@ namespace WebApplication4.Models
         public Wind Wind { set; get; }
 
 
-        public string GetWeather()
+        public string GetWeather(string Name)
         {
             using (WebClient webClient = new WebClient())
             {
@@ -51,5 +51,16 @@ namespace WebApplication4.Models
 
 
         }
+    }
+
+    public class NewCityWeather
+    {
+        public int ID { set; get; }
+        public string Name { set; get; }
+        //[EntityTypeBuilder.Ignore]
+        public string temp { set; get; }
+        //[EntityTypeBuilder.Ignore]
+        public string speed { set; get; }
+
     }
 }
